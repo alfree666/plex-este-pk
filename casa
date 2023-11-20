@@ -1,0 +1,22 @@
+---
+version: "2.1"
+services:
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    ports: 
+      - "32400:32400" 
+    network_mode: host
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Argentina/Buenos_Aires
+      - VERSION=docker
+      - PLEX_CLAIM= laim-jikFHuXDdCxy82v_hnZT #optional
+      - ADVERTISE_IP= http://192.168.0.2:32400/
+    volumes:
+      - /srv/dev-disk-by-uuid-dd233fe1-b661-4240-ba9f-420c0120c9d2/6TB/dockers/plex/config:/config
+      #- /srv/dev-disk-by-uuid-dd233fe1-b661-4240-ba9f-420c0120c9d2/6TB/media/series:/tv
+      #- /srv/dev-disk-by-uuid-dd233fe1-b661-4240-ba9f-420c0120c9d2/6TB/dockers/plex/movies:/movies
+      - /srv/dev-disk-by-uuid-dd233fe1-b661-4240-ba9f-420c0120c9d2/6TB/media:/data 
+    restart: unless-stopped
